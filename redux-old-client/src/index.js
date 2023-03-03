@@ -6,17 +6,18 @@ import reportWebVitals from './reportWebVitals';
 import AuthProvider from './activity/contex/AuthProvider/AuthProvider';
 import { RouterProvider } from 'react-router-dom';
 import route from './activity/routes/Routes';
+import { Provider } from 'react-redux';
+import store from './activity/redux/store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={route} />
+      <Provider store={store}>
+        <RouterProvider router={route} />
+      </Provider>
     </AuthProvider>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
