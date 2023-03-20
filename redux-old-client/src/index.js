@@ -11,13 +11,15 @@ import store from './activity/redux/store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <AuthProvider>
-      <Provider store={store}>
-        <RouterProvider router={route} />
-      </Provider>
-    </AuthProvider>
-  </React.StrictMode>
+  <div className='static'>
+    <React.StrictMode>
+      <AuthProvider>
+        <Provider store={store}>
+          <RouterProvider router={route} />
+        </Provider>
+      </AuthProvider>
+    </React.StrictMode>
+  </div>
 );
 
 reportWebVitals();

@@ -1,11 +1,16 @@
 import React from 'react'
+import Products from '../Products/Products'
 
 function Home() {
     return (
         <div>
-            <div className="App">
-                <button>Admin</button>
-                <button>User</button>
+            <div>
+                <button className='btn'>Admin</button>
+                <button className='btn'>User</button>
+                <button className='btn'>Products</button>
+            </div>
+            <div>
+                <Products />
             </div>
         </div>
     )
