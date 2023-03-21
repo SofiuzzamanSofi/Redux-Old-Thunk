@@ -9,7 +9,7 @@ function ContentDetails() {
     const dispatch = useDispatch();
     const { pathname } = useLocation();
     const { _id } = useParams();
-    console.log("this is:", contentsDetails);
+    // console.log("this is:", contentsDetails);
 
     useEffect(() => {
         dispatch(getContentDetailsData(_id))

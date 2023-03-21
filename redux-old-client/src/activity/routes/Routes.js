@@ -3,6 +3,7 @@ import Admin from "../component/Admin/Admin";
 import ContentDetails from "../component/Contents/ContentDetails";
 import Home from "../component/Home/Home";
 import Main from "../component/Layout/Main";
+import ReadingHistory from "../component/ReadingHistory/ReadingHistory";
 import User from "../component/User/User";
 
 const route = createBrowserRouter([
@@ -25,6 +26,10 @@ const route = createBrowserRouter([
             {
                 path: "content/:_id",
                 element: <ContentDetails />,
+            },
+            {
+                path: "reading-history",
+                element: <ReadingHistory />,
             },
         ]
     }

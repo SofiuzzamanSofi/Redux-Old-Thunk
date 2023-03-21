@@ -11,7 +11,7 @@ const contentReducer = (state = initialState, action) => {
     const readingContent = state.readingHistory.find(
         readingC => readingC._id === action.payload._id
     );
-    console.log("readingC:", readingContent, "payloadddd:", action.payload);
+    // console.log("readingC:", readingContent, "payloadddd:", action.payload);
 
 
     switch (action.type) {

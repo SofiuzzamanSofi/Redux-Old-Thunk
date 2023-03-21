@@ -7,7 +7,7 @@ function Main() {
     return (
         <>
             <Header />
-            <div className='mb-16'>
+            <div className=''>
 
                 <Outlet />
             </div>
