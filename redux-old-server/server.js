@@ -2,6 +2,8 @@ import express from "express";
 import * as dotenv from "dotenv";
 import colors from "colors";
 import cors from "cors";
+import { MongoClient, ServerApiVersion } from "mongodb";
+
 
 // for file read write delete edit ---
 import fs from "fs";
@@ -21,28 +23,54 @@ app.use(express.json());
 const __dirname = path.resolve();
 const productsFilePath = path.join(__dirname, "/", "components", "data", "products.json");
 
+
+
+
+
+const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PW}@cluster0.zwgt8km.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+const contentsCollection = client.db("redux-thunk-practice").collection("contents");
+
+
+
+
+
+
+
+
+
 const run = async () => {
 
 
     try {
-        app.get("/content", (req, res) => {
-            fs.readFile(productsFilePath, "utf8", (err, data) => {
-                if (err) {
-                    console.log(err);
-                    return res.status(500).send({
-                        success: false,
-                        message: "somethings wrong happened on file red or json file read.",
-                    })
-                }
-                else {
-                    const products = JSON.parse(data);
-                    return res.status(200).send({
-                        success: true,
-                        message: "successfully got data",
-                        data: products,
-                    })
-                }
-            })
+        app.get("/content", async (req, res) => {
+            // fs.readFile(productsFilePath, "utf8", (err, data) => {
+            //     if (err) {
+            //         console.log(err);
+            //         return res.status(500).send({
+            //             success: false,
+            //             message: "somethings wrong happened on file red or json file read.",
+            //         })
+            //     }
+            //     else {
+            //         const products = JSON.parse(data);
+            //         return res.status(200).send({
+            //             success: true,
+            //             message: "successfully got data",
+            //             data: products,
+            //         })
+            //     }
+            // })
+
+            const data = await contentsCollection.find({}).toArray();
+            if (data) {
+                res.status(200).send({
+                    success: true,
+                    message: "successfully got data",
+                    data: data,
+                })
+            }
+            // console.log(data);
         })
     }
     catch (error) {
