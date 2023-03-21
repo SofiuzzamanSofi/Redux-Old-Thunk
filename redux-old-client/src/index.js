@@ -11,7 +11,7 @@ import store from './activity/redux/store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <>
+  <div className="relative min-h-screen">
     {/* <React.StrictMode> */}
     <AuthProvider>
       <Provider store={store}>
@@ -19,7 +19,7 @@ root.render(
       </Provider>
     </AuthProvider>
     {/* </React.StrictMode> */}
-  </>
+  </div>
 );
 
 reportWebVitals();

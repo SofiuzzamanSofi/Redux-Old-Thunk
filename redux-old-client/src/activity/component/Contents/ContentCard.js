@@ -11,7 +11,7 @@ function ContentCard({ content }) {
 
     const goDetailsPage = (_id) => {
         // console.log("clicked:", _id);
-        navigate(`content/${_id}`)
+        navigate(`/content/${_id}`)
     }
 
     return (

@@ -1,12 +1,13 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-function ReadingHistory() {
+function ContentList() {
 
-    const readingHistory = useSelector(state => state.contents.readingHistory);
+
+    const contents = useSelector(state => state.contents.contents);
     const navigate = useNavigate();
-    console.log(".readingHistory.readingHistory:", readingHistory);
+    console.log(".contents.contents:", contents);
 
 
 
@@ -17,9 +18,9 @@ function ReadingHistory() {
 
 
     return (
-        <div>
+        <div className='p-5'>
             <div>
-                <h1>Your Reading History</h1>
+                <h1>Your Total content list</h1>
             </div>
 
             <div className="overflow-x-auto">
@@ -34,8 +35,8 @@ function ReadingHistory() {
                         </tr>
                     </thead>
                     {
-                        readingHistory?.length ?
-                            readingHistory.map((r, i) => <tbody key={i}>
+                        contents?.length ?
+                            contents.reverse().map((r, i) => <tbody key={i}>
                                 <tr
                                     className="hover cursor-pointer"
                                     title='click to see details'
@@ -59,4 +60,4 @@ function ReadingHistory() {
     )
 }
 
-export default ReadingHistory
+export default ContentList

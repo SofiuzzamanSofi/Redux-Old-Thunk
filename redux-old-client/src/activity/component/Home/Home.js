@@ -7,14 +7,13 @@ import Contents from '../Contents/Contents'
 function Home() {
 
     const readingHistory = useSelector(state => state.contents.readingHistory);
-    console.log("readingHistory:", readingHistory);
+    // console.log("readingHistory:", readingHistory);
 
     return (
         <div>
             <div className='flex justify-center gap-2'>
-                <Link><button className='btn'>Admin</button></Link>
-                <Link><button className='btn'>User</button></Link>
-                <Link><button className='btn'>Products</button></Link>
+                <Link to="/dashboard"><button className='btn'>Admin</button></Link>
+                {/* <Link><button className='btn'>User</button></Link> */}
                 {
                     readingHistory?.length ?
                         <Link to="/reading-history"><button className='btn'>Reading His</button></Link>
