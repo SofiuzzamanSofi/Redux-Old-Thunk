@@ -25,7 +25,7 @@ const run = async () => {
 
 
     try {
-        app.get("/products", (req, res) => {
+        app.get("/content", (req, res) => {
             fs.readFile(productsFilePath, "utf8", (err, data) => {
                 if (err) {
                     console.log(err);

@@ -1,5 +1,6 @@
 import React from 'react'
-import Products from '../Products/Products'
+import Contents from '../Contents/Contents'
+
 
 function Home() {
     return (
@@ -10,7 +11,7 @@ function Home() {
                 <button className='btn'>Products</button>
             </div>
             <div>
-                <Products />
+                <Contents />
             </div>
         </div>
     )
