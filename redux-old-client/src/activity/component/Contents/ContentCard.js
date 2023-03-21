@@ -7,10 +7,10 @@ function ContentCard({ content }) {
     const dispatch = useDispatch();
     const { pathname } = useLocation();
     const navigate = useNavigate();
-    console.log(content);
+    // console.log(content);
 
     const goDetailsPage = (_id) => {
-        console.log("clicked:", _id);
+        // console.log("clicked:", _id);
         navigate(`content/${_id}`)
     }
 

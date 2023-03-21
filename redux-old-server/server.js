@@ -2,7 +2,7 @@ import express from "express";
 import * as dotenv from "dotenv";
 import colors from "colors";
 import cors from "cors";
-import { MongoClient, ServerApiVersion } from "mongodb";
+import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
 
 
 // for file read write delete edit ---
@@ -43,7 +43,7 @@ const run = async () => {
 
 
     try {
-        app.get("/content", async (req, res) => {
+        app.get("/content/:_id", async (req, res) => {
             // fs.readFile(productsFilePath, "utf8", (err, data) => {
             //     if (err) {
             //         console.log(err);
@@ -62,15 +62,28 @@ const run = async () => {
             //     }
             // })
 
-            const data = await contentsCollection.find({}).toArray();
-            if (data) {
-                res.status(200).send({
-                    success: true,
-                    message: "successfully got data",
-                    data: data,
-                })
+            const _id = req?.params?._id;
+            if (_id !== "all") {
+                const query = { _id: new ObjectId(_id) }
+                const data = await contentsCollection.findOne(query);
+                if (data) {
+                    res.status(200).send({
+                        success: true,
+                        message: "successfully got data",
+                        data: data,
+                    })
+                }
             }
-            // console.log(data);
+            else {
+                const data = await contentsCollection.find({}).toArray();
+                if (data) {
+                    res.status(200).send({
+                        success: true,
+                        message: "successfully got All data",
+                        data: data,
+                    })
+                }
+            }
         })
     }
     catch (error) {

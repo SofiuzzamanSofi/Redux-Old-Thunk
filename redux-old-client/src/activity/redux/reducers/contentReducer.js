@@ -1,8 +1,9 @@
-import { GET_CONTENT } from "../actionTypes/actionTypes";
+import { CONTENT_DETAILS, GET_CONTENT } from "../actionTypes/actionTypes";
 
 const initialState = {
     cart: [],
     contents: [],
+    readingHistory: []
 };
 const contentReducer = (state = initialState, action) => {
 
@@ -14,6 +15,12 @@ const contentReducer = (state = initialState, action) => {
             return {
                 ...state,
                 contents: action.payload,
+            }
+
+        case CONTENT_DETAILS:
+            return {
+                ...state,
+                readingHistory: [...state.readingHistory, action.payload],
             }
 
 

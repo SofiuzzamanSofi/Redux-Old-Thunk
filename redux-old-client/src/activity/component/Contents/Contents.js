@@ -6,7 +6,7 @@ import ContentCard from './ContentCard';
 function Contents() {
 
     const contents = useSelector(state => state.contents.contents)
-    console.log(contents);
+    // console.log(contents);
     const dispatch = useDispatch();
 
     useEffect(() => {

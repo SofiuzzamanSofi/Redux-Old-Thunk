@@ -7,7 +7,10 @@ function Main() {
     return (
         <>
             <Header />
-            <Outlet />
+            <div className='mb-16'>
+
+                <Outlet />
+            </div>
             <Footer />
         </>
     )
