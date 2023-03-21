@@ -7,6 +7,11 @@ const initialState = {
 };
 const contentReducer = (state = initialState, action) => {
 
+    // const selectedContent = state.contents.find();
+    const readingContent = state.readingHistory.find(
+        readingC => readingC._id === action.payload._id
+    );
+    console.log("readingC:", readingContent, "payloadddd:", action.payload);
 
 
     switch (action.type) {
@@ -18,11 +23,23 @@ const contentReducer = (state = initialState, action) => {
             }
 
         case CONTENT_DETAILS:
-            return {
-                ...state,
-                readingHistory: [...state.readingHistory, action.payload],
+            if (readingContent) {
+                const newContent = state.readingHistory.filter(
+                    readingC => readingC._id !== readingContent._id
+                );
+                // readingContent.readingCount = readingContent.readingCount + 1;
+                // readingContent.readingCount += 1;
+                readingContent.readingCount++;
+                return {
+                    ...state,
+                    readingHistory: [...newContent, readingContent]
+                }
+            } else {
+                return {
+                    ...state,
+                    readingHistory: [...state.readingHistory, { ...action.payload, readingCount: 1 }],
+                }
             }
-
 
         default: return state;
     }

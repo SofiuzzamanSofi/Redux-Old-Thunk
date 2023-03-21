@@ -9,18 +9,24 @@ function ContentDetails() {
     const dispatch = useDispatch();
     const { pathname } = useLocation();
     const { _id } = useParams();
-    const content = contentsDetails[0];
-    console.log("this is:", content?.spec[0]);
+    console.log("this is:", contentsDetails);
 
     useEffect(() => {
         dispatch(getContentDetailsData(_id))
     }, [_id, dispatch]);
 
+
+
+
+    const contents = contentsDetails.reverse();
+    const content = contents[0];
     if (!content) {
         return;
     }
+
+
     return (
-        <div className='shadow-lg relative rounded-3xl border p-3 flex flex-col text-white cursor-pointer' title='click to see details'
+        <div className='shadow-lg relative rounded-3xl border p-3 flex flex-col text-white' title='click to see details'
 
         >
             {pathname.includes("cart") && (
