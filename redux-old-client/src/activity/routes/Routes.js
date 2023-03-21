@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Admin from "../component/Admin/Admin";
+import ContentDetails from "../component/Contents/ContentDetails";
 import Home from "../component/Home/Home";
 import Main from "../component/Layout/Main";
 import User from "../component/User/User";
@@ -20,6 +21,10 @@ const route = createBrowserRouter([
             {
                 path: "user",
                 element: <User />,
+            },
+            {
+                path: "content/:_id",
+                element: <ContentDetails />,
             },
         ]
     }

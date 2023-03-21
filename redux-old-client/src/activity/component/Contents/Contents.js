@@ -19,7 +19,7 @@ function Contents() {
             <div>
                 Contents
             </div>
-            <div>
+            <div className='grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4'>
                 {contents?.length && contents.map((content, i) => < ContentCard key={i} content={content} />)}
             </div>
         </div>
