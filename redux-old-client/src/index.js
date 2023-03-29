@@ -11,7 +11,7 @@ import store from './activity/redux/store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <div className="relative min-h-screen">
+  <div className="relative min-h-screen p-4">
     {/* <React.StrictMode> */}
     <AuthProvider>
       <Provider store={store}>
