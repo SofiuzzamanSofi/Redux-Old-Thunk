@@ -16,28 +16,29 @@ function AddContent() {
         const formData = new FormData();
         formData.append("file", image);
 
-        console.log("formData", image,);
-        console.log("formData", formData,);
-        // const contentInfo = {
-        //     model,
-        //     image: formData,
-        //     keyFeature: [
-        //         keyFeature,
-        //     ],
-        //     spec: [
-        //         {
-        //             processor: specprocessor,
-        //         }
-        //     ]
-        // };
-        // console.log("contentInfo:", contentInfo);
+
         const res = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/image-upload`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
         });
         if (res?.data?.success) {
-            console.log("add content success", res.data?.data);
+            const contentInfo = {
+                model,
+                image: res.data?.data,
+                keyFeature: [
+                    keyFeature,
+                ],
+                spec: [
+                    {
+                        processor: specprocessor,
+                    }
+                ]
+            };
+            const result = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/add-content`, contentInfo)
+            if (result?.data?.success) {
+                alert("data post success")
+            }
         }
         else {
             console.log("add content FAILED");
