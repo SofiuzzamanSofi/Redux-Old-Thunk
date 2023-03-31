@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import Admin from "../component/Admin/Admin";
 import ContentDetails from "../component/Contents/ContentDetails";
-import AddContent from "../component/Dashboard/AddContent";
 import ContentList from "../component/Dashboard/ContentList";
 import Home from "../component/Home/Home";
 import Main from "../component/Layout/Main";
 import ReadingHistory from "../component/ReadingHistory/ReadingHistory";
 import User from "../component/User/User";
+import AddContent from "./AddContent";
 
 const route = createBrowserRouter([
     {

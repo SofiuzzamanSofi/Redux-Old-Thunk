@@ -29,7 +29,7 @@ function ContentDetails() {
         <div className='flex justify-center items-center'>
 
 
-            <div className='shadow-lg relative rounded-3xl border p-3 flex flex-col text-white max-w-[768px]' title='click to see details'
+            <div className='shadow-lg relative rounded-3xl border p-3 flex flex-col dark:text-white max-w-[768px]' title='click to see details'
 
             >
                 {pathname.includes("cart") && (

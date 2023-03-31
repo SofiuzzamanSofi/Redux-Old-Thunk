@@ -2,9 +2,7 @@ import React from 'react'
 
 function AddContent() {
     return (
-        <div>
-            AddContent
-        </div>
+        <div>AddContent</div>
     )
 }
 

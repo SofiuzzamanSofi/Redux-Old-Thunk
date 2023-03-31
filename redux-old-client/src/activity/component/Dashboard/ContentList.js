@@ -7,7 +7,7 @@ function ContentList() {
 
     const contents = useSelector(state => state.contents.contents);
     const navigate = useNavigate();
-    console.log(".contents.contents:", contents);
+    console.log("contentList:", contents);
 
 
 
@@ -24,7 +24,7 @@ function ContentList() {
             </div>
 
             <div className="overflow-x-auto">
-                <table className="table w-full">
+                <table className="table w-full text-black dark:text-white">
                     {/* head */}
                     <thead>
                         <tr>
