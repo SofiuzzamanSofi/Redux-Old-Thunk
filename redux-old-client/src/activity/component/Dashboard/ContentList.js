@@ -42,7 +42,7 @@ function ContentList() {
                                     title='click to see details'
                                     onClick={() => goDetailsPage(r._id)}
                                 >
-                                    <th>{i}</th>
+                                    <th>{i + 1}</th>
                                     <td>{r?.model}</td>
                                     <td>
                                         <img className='max-w-[80px] max-h-[80px]' src={r?.image} alt="" />
