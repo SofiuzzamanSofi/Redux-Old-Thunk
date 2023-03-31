@@ -3,7 +3,9 @@ import * as dotenv from "dotenv";
 import colors from "colors";
 import cors from "cors";
 import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
-
+import cloudinary from "cloudinary";
+import multer from "multer";
+import fileUpload from "express-fileupload";
 
 // for file read write delete edit ---
 import fs from "fs";
@@ -24,7 +26,21 @@ const __dirname = path.resolve();
 const productsFilePath = path.join(__dirname, "/", "components", "data", "products.json");
 
 
+// Configure Multer
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+app.use(fileUpload(({
+    useTempFiles: true,
+    limits: { fileSize: 50 * 2024 * 1024 }
+})))
 
+// cloudinary confit ---
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    api_version: "v2"
+});
 
 
 const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PW}@cluster0.zwgt8km.mongodb.net/?retryWrites=true&w=majority`;
@@ -32,17 +48,12 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 const contentsCollection = client.db("redux-thunk-practice").collection("contents");
 
 
-
-
-
-
-
-
-
 const run = async () => {
 
-
     try {
+
+
+        // get content from DATABASE --------
         app.get("/content/:_id", async (req, res) => {
             // fs.readFile(productsFilePath, "utf8", (err, data) => {
             //     if (err) {
@@ -84,6 +95,64 @@ const run = async () => {
                     })
                 }
             }
+        });
+
+
+        // Route for uploading files on Clodenary --
+        // app.post("/image-upload", upload.single("file"), async (req, res) => {
+        //     try {
+        //         if (!req.file) {
+        //             return res.status(400).send({
+        //                 success: false,
+        //                 message: "Missing required parameter - file",
+        //             });
+        //         }
+
+        //         // Upload the file to Cloudinary
+        //         const result = await cloudinary.uploader.upload(req.file);
+
+        //         // Send the URL of the uploaded image back to the client
+        //         res.status(200).send({
+        //             success: true,
+        //             message: "File uploaded successfully",
+        //             data: result.secure_url,
+        //         });
+        //     } catch (error) {
+        //         console.log(error);
+        //         res.status(500).send({
+        //             success: false,
+        //             message: "File upload failed",
+        //         });
+        //     }
+        // });
+
+        app.post("/image-upload", async (req, res) => {
+            const file = req.files.file;
+            const result = await cloudinary.uploader.upload(file.tempFilePath, {
+                public_id: `${Date.now()}`,
+                resource_type: "auto",
+                folder: "images",
+            });
+            if (result) {
+                res.status(200).send({
+                    success: true,
+                    message: "successfully host image on cloudinary",
+                    data: result?.secure_url,
+                })
+            }
+        })
+
+
+
+
+
+        // add a content on DB ----
+        app.post("/add-content", async (req, res) => {
+            const contentInfo = req?.body;
+            console.log(contentInfo);
+            // const res = cloudinary.uploader.upload
+            // const result = await contentsCollection.insertOne(contentInfo);
+            // console.log(result);
         })
     }
     catch (error) {

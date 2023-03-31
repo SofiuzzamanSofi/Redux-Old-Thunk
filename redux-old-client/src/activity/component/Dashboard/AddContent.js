@@ -1,29 +1,49 @@
 import React from 'react'
+import axios from "axios";
 
 function AddContent() {
 
 
-    const submitFrom = (e) => {
+    const submitFrom = async (e) => {
         e.preventDefault();
         const form = e.target;
 
         const model = form?.model?.value;
-        const image = form?.image?.value;
+        const image = form?.image?.files[0];
         const keyFeature = form?.keyFeature?.value;
         const specprocessor = form?.specprocessor?.value;
-        const contentInfo = {
-            model,
-            image: "htttp\:5000",
-            keyFeature: [
-                keyFeature,
-            ],
-            spec: [
-                {
-                    processor: specprocessor,
-                }
-            ]
-        };
-        console.log("contentInfo:", contentInfo);
+
+        const formData = new FormData();
+        formData.append("file", image);
+
+        console.log("formData", image,);
+        console.log("formData", formData,);
+        // const contentInfo = {
+        //     model,
+        //     image: formData,
+        //     keyFeature: [
+        //         keyFeature,
+        //     ],
+        //     spec: [
+        //         {
+        //             processor: specprocessor,
+        //         }
+        //     ]
+        // };
+        // console.log("contentInfo:", contentInfo);
+        const res = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/image-upload`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        if (res?.data?.success) {
+            console.log("add content success", res.data?.data);
+        }
+        else {
+            console.log("add content FAILED");
+        }
+
+
     }
 
 
@@ -43,7 +63,7 @@ function AddContent() {
                     </div>
                     <div className='grid gap-2'>
                         <label htmlFor="">Picture</label>
-                        <input name='image' type="file" placeholder='Title pls' className='p-2 rounded-sm' required />
+                        <input name='image' type="file" placeholder='Title pls' className='p-2 rounded-sm' required accept='image/*' />
                     </div>
                     <div className='grid gap-2'>
                         <label htmlFor="">keyFeature || Summery</label>
