@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import getContentData from '../../redux/thunk/content/getContentData';
+
+
 
 function AddContent() {
 
+    const [buttonLoading, setButtonLoading] = useState(false);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const submitFrom = async (e) => {
         e.preventDefault();
@@ -16,7 +24,7 @@ function AddContent() {
         const formData = new FormData();
         formData.append("file", image);
 
-
+        setButtonLoading(true)
         const res = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/image-upload`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
@@ -36,11 +44,15 @@ function AddContent() {
                 ]
             };
             const result = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/add-content`, contentInfo)
+            setButtonLoading(false)
             if (result?.data?.success) {
+                dispatch(getContentData())
                 alert("data post success")
+                navigate("/dashboard")
             }
         }
         else {
+            setButtonLoading(false)
             console.log("add content FAILED");
         }
 
@@ -76,7 +88,7 @@ function AddContent() {
                     </div>
                     <div className='grid gap-2'>
 
-                        <input type="submit" value="Submit" placeholder='Details' className='p-2 rounded-sm bg-sky-800 cursor-pointer' required />
+                        <input type="submit" value={`${buttonLoading ? "Loading..." : "Submit"}`} placeholder='Details' className='p-2 rounded-sm bg-sky-800 cursor-pointer' required />
                     </div>
                 </form>
             </div>

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +15,15 @@ function ContentList() {
     const goDetailsPage = (_id) => {
         // console.log("clicked:", _id);
         navigate(`/content/${_id}`)
+    };
+
+    const deleteButtonFunction = (id) => {
+        const yesOrNo = window.confirm("Do you want to delete?")
+        if (yesOrNo) {
+            axios.delete(`${process.env.REACT_APP_SERVER_SITE_URL}/content/${id}`)
+                .then(res => console.log(res.data))
+            console.log(id, "id", yesOrNo)
+        }
     }
 
 
@@ -31,7 +41,7 @@ function ContentList() {
                             <th>No.</th>
                             <th>Name</th>
                             <th>Img</th>
-                            <th>Reading Count</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     {
@@ -47,7 +57,25 @@ function ContentList() {
                                     <td>
                                         <img className='max-w-[80px] max-h-[80px]' src={r?.image} alt="" />
                                     </td>
-                                    <td>{r?.readingCount}</td>
+                                    <td>
+                                        <div className='flex justify-center gap-1 items-center'
+
+                                        >
+                                            <button className='btn btn-xs bg-cyan-600 text-black z-10'
+
+                                            >
+                                                Edit
+                                            </button>
+                                            <button className='btn btn-xs bg-red-600 text-white z-10'
+                                                onClick={(event) => {
+                                                    deleteButtonFunction(r._id)
+                                                    event.stopPropagation()
+                                                }}
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
                                 </tr>
 
                             </tbody>)

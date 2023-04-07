@@ -11,3 +11,6 @@ Live site Link-
  Server side Link-
 
  [--](--).
+
+
+ • Image upload on Cloudinary || By Backend 

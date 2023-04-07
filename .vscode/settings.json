@@ -1,0 +1,6 @@
+{
+    "emmet.showSuggestionsAsSnippets": true,
+    "tailwindCSS.emmetCompletions": true,
+    "emmet.useInlineCompletions": true,
+    "emmet.triggerExpansionOnTab": true
+}

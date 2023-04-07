@@ -95,6 +95,7 @@ const run = async () => {
         });
 
 
+        // image upload --image upload on cloudenary
         app.post("/image-upload", async (req, res) => {
             const file = req.files.file;
             const result = await cloudinary.uploader.upload(file.tempFilePath, {
@@ -126,6 +127,15 @@ const run = async () => {
                     data: result?.insertedId,
                 })
             }
+        });
+
+        // delete comment on db --
+        app.delete("/content/:id", async (req, res) => {
+            const id = req.params.id;
+            console.log(id, "ididid")
+            const query = { _id: ObjectId(id) };
+            const result = await contentsCollection.deleteOne(query);
+            console.log(result)
         })
     }
     catch (error) {
