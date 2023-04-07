@@ -1,14 +1,15 @@
 import axios from 'axios';
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import getContentData from '../../redux/thunk/content/getContentData';
 
 function ContentList() {
 
 
     const contents = useSelector(state => state.contents.contents);
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
 
 
 
@@ -16,17 +17,22 @@ function ContentList() {
         navigate(`/content/${_id}`)
     };
 
-    const deleteButtonFunction = (id) => {
+    const deleteButtonFunction = (_id) => {
         const yesOrNo = window.confirm("Do you want to delete?")
         if (yesOrNo) {
-            axios.delete(`${process.env.REACT_APP_SERVER_SITE_URL}/content/${id}`)
+            axios.delete(`${process.env.REACT_APP_SERVER_SITE_URL}/content/${_id}`)
                 .then(res => {
                     if (res.data.success) {
+                        dispatch(getContentData())
                         alert(res.data.message)
                     }
                 })
 
         }
+    };
+
+    const goEditPage = (content) => {
+        navigate(`/dashboard/edit-content/${content?._id}`, { state: { content } })
     }
 
 
@@ -65,7 +71,10 @@ function ContentList() {
 
                                         >
                                             <button className='btn btn-xs bg-cyan-600 text-black z-10'
-
+                                                onClick={(event) => {
+                                                    goEditPage(r)
+                                                    event.stopPropagation()
+                                                }}
                                             >
                                                 Edit
                                             </button>

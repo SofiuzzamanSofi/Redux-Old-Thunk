@@ -7,6 +7,7 @@ import Home from "../component/Home/Home";
 import Main from "../component/Layout/Main";
 import ReadingHistory from "../component/ReadingHistory/ReadingHistory";
 import User from "../component/User/User";
+import EditContent from './../component/Dashboard/EditContent';
 
 const route = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const route = createBrowserRouter([
                     {
                         path: "/dashboard/add-content",
                         element: <AddContent />
+                    },
+                    {
+                        path: "/dashboard/edit-content/:_id",
+                        element: <EditContent />
                     },
 
                 ]
