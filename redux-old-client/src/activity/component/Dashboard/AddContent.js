@@ -41,7 +41,8 @@ function AddContent() {
                     {
                         processor: specprocessor,
                     }
-                ]
+                ],
+                dateAndTime: new Date(),
             };
             const result = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/add-content`, contentInfo)
             setButtonLoading(false)

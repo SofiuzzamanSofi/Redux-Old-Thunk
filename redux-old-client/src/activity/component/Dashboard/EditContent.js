@@ -14,7 +14,7 @@ function EditContent() {
     const content = location.state?.content;
     const dispatch = useDispatch();
 
-
+    console.log(content)
 
 
 
@@ -60,16 +60,17 @@ function EditContent() {
                     {
                         processor: specprocessor,
                     }
-                ]
+                ],
+                dateAndTime: new Date(),
             };
             console.log("contentInfo:", contentInfo)
-            // const result = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/add-content`, contentInfo)
-            // setButtonLoading(false)
-            // if (result?.data?.success) {
-            //     dispatch(getContentData())
-            //     alert("data post success")
-            //     navigate("/dashboard")
-            // }
+            const result = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/edit-content/${content._id}`, contentInfo)
+            setButtonLoading(false)
+            if (result?.data?.success) {
+                dispatch(getContentData())
+                alert("data post success")
+                navigate("/dashboard")
+            }
         }
         else {
             setButtonLoading(false)

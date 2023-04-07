@@ -125,6 +125,22 @@ const run = async () => {
             }
         });
 
+
+        // Edit a content on DB ----
+        app.post("/edit-content/:id", async (req, res) => {
+            const { id } = req.params;
+            const contentInfo = req?.body;
+            console.log("first line 133:", id, contentInfo)
+            // const result = await contentsCollection.insertOne(contentInfo);
+            // if (result?.acknowledged) {
+            //     res.status(200).send({
+            //         success: true,
+            //         message: "content add on DB",
+            //         data: result?.insertedId,
+            //     })
+            // }
+        });
+
         // delete comment on db --
         app.delete("/content/:id", async (req, res) => {
             const result = await contentsCollection.deleteOne({ _id: new ObjectId(req.params.id) });
