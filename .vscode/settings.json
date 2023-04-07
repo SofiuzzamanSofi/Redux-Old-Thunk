@@ -2,5 +2,6 @@
     "emmet.showSuggestionsAsSnippets": true,
     "tailwindCSS.emmetCompletions": true,
     "emmet.useInlineCompletions": true,
-    "emmet.triggerExpansionOnTab": true
+    "emmet.triggerExpansionOnTab": true,
+    "editor.wordWrap": "off"
 }

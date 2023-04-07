@@ -75,8 +75,12 @@ function AddContent() {
                         <input name='model' type="text" placeholder='Title pls' className='p-2 rounded-sm' required />
                     </div>
                     <div className='grid gap-2'>
-                        <label htmlFor="">Picture</label>
-                        <input name='image' type="file" placeholder='Title pls' className='p-2 rounded-sm' required accept='image/*' />
+                        <label htmlFor="image">
+                            <span>Picture</span>
+                            <br />
+                            {/* <span>Choose Image pls</span> */}
+                            <input name='image' type="file" placeholder='Title pls' className='p-2 rounded-sm' required accept='image/*' />
+                        </label>
                     </div>
                     <div className='grid gap-2'>
                         <label htmlFor="">keyFeature || Summery</label>

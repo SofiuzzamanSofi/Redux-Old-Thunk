@@ -14,6 +14,23 @@ function EditContent() {
     const content = location.state?.content;
     const dispatch = useDispatch();
 
+
+
+
+
+
+    const changeImagePreview = e => {
+        if (e.target.files.length === 0) return
+        else {
+            let file = e.target.files[0];
+            let url = URL.createObjectURL(file);
+            document.querySelector("#file-1-preview div").innerText = file.name;
+            document.querySelector("#file-1-preview img").src = url;
+        }
+    }
+
+
+
     const submitFrom = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -45,13 +62,14 @@ function EditContent() {
                     }
                 ]
             };
-            const result = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/add-content`, contentInfo)
-            setButtonLoading(false)
-            if (result?.data?.success) {
-                dispatch(getContentData())
-                alert("data post success")
-                navigate("/dashboard")
-            }
+            console.log("contentInfo:", contentInfo)
+            // const result = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/add-content`, contentInfo)
+            // setButtonLoading(false)
+            // if (result?.data?.success) {
+            //     dispatch(getContentData())
+            //     alert("data post success")
+            //     navigate("/dashboard")
+            // }
         }
         else {
             setButtonLoading(false)
@@ -80,7 +98,31 @@ function EditContent() {
                     </div>
                     <div className='grid gap-2'>
                         <label htmlFor="">Picture</label>
-                        <input name='image' type="file" placeholder='Title pls' className='p-2 rounded-sm' required accept='image/*' />
+                        {/* <input name='image' type="file" placeholder='Title pls' className='p-2 rounded-sm' required accept='image/*' /> */}
+
+
+
+
+                        {/* imge preview ------ */}
+                        <div className='grid mb-2'>
+                            <div className='form-element shadow-lg'>
+                                <input name='image' type="file" id='file-1' accept='image/*'
+                                    className='hidden'
+                                    onChange={changeImagePreview}
+                                />
+                                <label htmlFor="file-1" id='file-1-preview'>
+                                    <img src={content.image} alt=""
+                                        className='h-full w-full object-none max-h-[500px] cursor-pointer'
+                                    />
+                                    <div
+                                        className='relative mt-[-40px] bg-[rgba(0,0,0,0.5)] text-center leading-10 text-lg text-[#f5f5f5] font-semibold'>
+                                        <span className='text-4xl'> + </span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+
                     </div>
                     <div className='grid gap-2'>
                         <label htmlFor="">keyFeature || Summery</label>
