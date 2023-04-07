@@ -119,7 +119,7 @@ const run = async () => {
             if (result?.acknowledged) {
                 res.status(200).send({
                     success: true,
-                    message: "content add on DB",
+                    message: "content/data  add/post on DB",
                     data: result?.insertedId,
                 })
             }
@@ -128,18 +128,34 @@ const run = async () => {
 
         // Edit a content on DB ----
         app.post("/edit-content/:id", async (req, res) => {
-            const { id } = req.params;
+            const query = { _id: new ObjectId(req.params.id) };
             const contentInfo = req?.body;
-            console.log("first line 133:", id, contentInfo)
-            // const result = await contentsCollection.insertOne(contentInfo);
-            // if (result?.acknowledged) {
-            //     res.status(200).send({
-            //         success: true,
-            //         message: "content add on DB",
-            //         data: result?.insertedId,
-            //     })
-            // }
+            const update = {
+                $set: {
+                    model: contentInfo.model,
+                    image: contentInfo.image,
+                    keyFeature: [
+                        contentInfo.keyFeature[0]
+                    ],
+                    spec: [
+                        {
+                            processor: contentInfo.spec[0].processor
+                        }
+                    ],
+                },
+            };
+            const result = await contentsCollection.updateOne(query, update);
+            // console.log("result::", result)
+            if (result?.modifiedCount) {
+                res.status(200).send({
+                    success: true,
+                    message: "content Edit Successful",
+                    data: result,
+                });
+            }
         });
+
+
 
         // delete comment on db --
         app.delete("/content/:id", async (req, res) => {

@@ -25,6 +25,7 @@ function AddContent() {
         formData.append("file", image);
 
         setButtonLoading(true)
+        // upload image on cloudinary by server ---
         const res = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/image-upload`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
@@ -48,7 +49,7 @@ function AddContent() {
             setButtonLoading(false)
             if (result?.data?.success) {
                 dispatch(getContentData())
-                alert("data post success")
+                alert(result?.data?.message)
                 navigate("/dashboard")
             }
         }

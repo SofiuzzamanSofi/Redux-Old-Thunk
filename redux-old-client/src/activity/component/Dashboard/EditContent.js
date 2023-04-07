@@ -14,7 +14,6 @@ function EditContent() {
     const content = location.state?.content;
     const dispatch = useDispatch();
 
-    console.log(content)
 
 
 
@@ -44,15 +43,44 @@ function EditContent() {
         formData.append("file", image);
 
         setButtonLoading(true)
-        const res = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/image-upload`, formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        });
-        if (res?.data?.success) {
-            const contentInfo = {
+        let contentInfo;
+        if (image) {
+            // upload image on cloudinary by server ---
+            const res = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/image-upload`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+            if (res?.data?.success) {
+                contentInfo = {
+                    model,
+                    image: res.data?.data,
+                    keyFeature: [
+                        keyFeature,
+                    ],
+                    spec: [
+                        {
+                            processor: specprocessor,
+                        }
+                    ],
+                    dateAndTime: new Date(),
+                };
+                const result = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/edit-content/${content._id}`, contentInfo)
+                setButtonLoading(false)
+                if (result?.data?.success) {
+                    dispatch(getContentData())
+                    alert("data post success")
+                    navigate("/dashboard")
+                }
+            }
+            else {
+                setButtonLoading(false)
+            }
+        }
+        else {
+            contentInfo = {
                 model,
-                image: res.data?.data,
+                image: content.image,
                 keyFeature: [
                     keyFeature,
                 ],
@@ -63,18 +91,13 @@ function EditContent() {
                 ],
                 dateAndTime: new Date(),
             };
-            console.log("contentInfo:", contentInfo)
             const result = await axios.post(`${process.env.REACT_APP_SERVER_SITE_URL}/edit-content/${content._id}`, contentInfo)
             setButtonLoading(false)
             if (result?.data?.success) {
                 dispatch(getContentData())
-                alert("data post success")
+                alert(result?.data?.message)
                 navigate("/dashboard")
             }
-        }
-        else {
-            setButtonLoading(false)
-            console.log("add content FAILED");
         }
 
 
