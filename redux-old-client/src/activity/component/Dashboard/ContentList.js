@@ -8,12 +8,11 @@ function ContentList() {
 
     const contents = useSelector(state => state.contents.contents);
     const navigate = useNavigate();
-    console.log("contentList:", contents);
+
 
 
 
     const goDetailsPage = (_id) => {
-        // console.log("clicked:", _id);
         navigate(`/content/${_id}`)
     };
 
@@ -21,8 +20,12 @@ function ContentList() {
         const yesOrNo = window.confirm("Do you want to delete?")
         if (yesOrNo) {
             axios.delete(`${process.env.REACT_APP_SERVER_SITE_URL}/content/${id}`)
-                .then(res => console.log(res.data))
-            console.log(id, "id", yesOrNo)
+                .then(res => {
+                    if (res.data.success) {
+                        alert(res.data.message)
+                    }
+                })
+
         }
     }
 

@@ -2,7 +2,7 @@ import express from "express";
 import * as dotenv from "dotenv";
 import colors from "colors";
 import cors from "cors";
-import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
+import { MongoClient, ServerApiVersion, ObjectId } from "mongodb";
 import cloudinary from "cloudinary";
 import fileUpload from "express-fileupload";
 
@@ -69,7 +69,6 @@ const run = async () => {
             //         })
             //     }
             // })
-
             const _id = req?.params?._id;
             if (_id !== "all") {
                 const query = { _id: new ObjectId(_id) }
@@ -113,9 +112,6 @@ const run = async () => {
         })
 
 
-
-
-
         // add a content on DB ----
         app.post("/add-content", async (req, res) => {
             const contentInfo = req?.body;
@@ -131,11 +127,14 @@ const run = async () => {
 
         // delete comment on db --
         app.delete("/content/:id", async (req, res) => {
-            const id = req.params.id;
-            console.log(id, "ididid")
-            const query = { _id: ObjectId(id) };
-            const result = await contentsCollection.deleteOne(query);
-            console.log(result)
+            const result = await contentsCollection.deleteOne({ _id: new ObjectId(req.params.id) });
+            if (result.deletedCount > 0) {
+                res.status(200).send({
+                    success: true,
+                    message: "successfully delete this services",
+                    data: result
+                })
+            }
         })
     }
     catch (error) {
