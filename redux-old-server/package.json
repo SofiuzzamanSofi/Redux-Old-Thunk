@@ -1,7 +1,8 @@
 {
-  "name": "index",
+  "name": "redux-old-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "redux-old-server-description",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node index"
