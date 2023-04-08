@@ -1,10 +1,10 @@
 {
-  "name": "server",
+  "name": "index",
   "version": "1.0.0",
   "description": "",
   "type": "module",
   "scripts": {
-    "server": "node server"
+    "start": "node index"
   },
   "keywords": [],
   "author": "",
