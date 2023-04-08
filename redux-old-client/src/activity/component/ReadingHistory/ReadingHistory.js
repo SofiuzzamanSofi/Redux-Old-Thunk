@@ -6,7 +6,7 @@ function ReadingHistory() {
 
     const readingHistory = useSelector(state => state.contents.readingHistory);
     const navigate = useNavigate();
-    console.log(".readingHistory.readingHistory:", readingHistory);
+    // console.log(".readingHistory.readingHistory:", readingHistory);
 
 
 
