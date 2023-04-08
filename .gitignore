@@ -2,14 +2,14 @@
 node_modules
 .env.local
 .env
-/.pnp
+.pnp
 .pnp.js
 
 # testing
-/coverage
+coverage
 
 # production
-/build
+build
 
 # misc
 .DS_Store
