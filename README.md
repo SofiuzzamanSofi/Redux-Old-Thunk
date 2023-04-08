@@ -13,7 +13,7 @@ Live site Link-
  [Rexux-old-thunk-server](https://redux-old-thunk.vercel.app)
 
 
- • Image upload on Cloudinary || By Backend 
+ Image upload on Cloudinary || By Backend 
  
  
 Preview: 
