@@ -142,6 +142,7 @@ const run = async () => {
                             processor: contentInfo.spec[0].processor
                         }
                     ],
+                    dateAndTime: contentInfo.dateAndTime,
                 },
             };
             const result = await contentsCollection.updateOne(query, update);
