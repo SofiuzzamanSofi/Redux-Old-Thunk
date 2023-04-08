@@ -1,10 +1,9 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 function ContentCard({ content }) {
 
-    const dispatch = useDispatch();
+
     const { pathname } = useLocation();
     const navigate = useNavigate();
     // console.log(content);

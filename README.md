@@ -6,7 +6,10 @@ site type: Client side && Server Side (Practive REDUX_THUNK)
 Live site Link-
 
  [Rexux-old-thunk-client](https://redux-old-thunk-client.onrender.com/).
+ Vercel: NOT WORKING
  [Rexux-old-thunk-client](https://redux-old-thunk-client.onrender.com)
+ Glitch WORKING
+ [Rexux-old-thunk-client](https://mercurial-factual-nightingale.glitch.me)
 
 
  Server side Link-

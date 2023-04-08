@@ -1,8 +1,5 @@
 import {
-    ADD_CONTENT,
     GET_CONTENT,
-    UPDATE_CONTENT,
-    DELETE_CONTENT,
     CONTENT_DETAILS,
 } from "../actionTypes/actionTypes";
 
