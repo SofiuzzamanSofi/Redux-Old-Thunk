@@ -17,7 +17,7 @@ Live site Link-
  Image upload on Cloudinary || By Backend 
  
  
-Preview: 
+Preview Image Screenshort: 
 
 ![image](https://user-images.githubusercontent.com/108426827/230703233-eb7868d8-6cae-4e7b-91e7-6867d48a8939.png)
 ![image](https://user-images.githubusercontent.com/108426827/230703253-0582b8bb-80bb-495e-91cb-32b84e38d2cb.png)
